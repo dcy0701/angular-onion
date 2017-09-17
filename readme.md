@@ -15,10 +15,10 @@ import justTestHtml from './just-test.html'
 
 @Inject('Validators')
 
-@Mixin(autoBd)
+@Mixin(auto)
 class justTestController {
     constructor () {
-       // ... constructor
+       // constructor
        this.user = 'onion'
     }
     
