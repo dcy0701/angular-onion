@@ -21,7 +21,7 @@ class justTestController {
        // constructor
        this.user = 'onion'
     }
-    
+
     @Observable(() => this.user, true)
     watchUser (newVal) {
        // Observable callback
@@ -31,12 +31,16 @@ class justTestController {
        // lifecycle
     }
 
+    ....
+}
+
 ```
 
 ### install
 
 
 `yarn add angular-onion`
+
 `#or npm i angular-onion`
 
 

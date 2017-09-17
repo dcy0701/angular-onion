@@ -9,6 +9,7 @@ export let Mixin = require('./src/decorators/$mixin');
 export let Observable = require('./src/decorators/$Observable');
 export let Service = require('./src/decorators/$Service');
 export let Component = require('./src/decorators/$Component');
+export let controller = require('./src/decorators/$controller');
 
-// polyfill
+// @polyfill
 export let ResetModule = require('./src/polyfill.js');
