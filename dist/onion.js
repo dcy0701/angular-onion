@@ -195,9 +195,10 @@ var Mixin = exports.Mixin = __webpack_require__(6);
 var Observable = exports.Observable = __webpack_require__(7);
 var Service = exports.Service = __webpack_require__(8);
 var Component = exports.Component = __webpack_require__(9);
+var controller = exports.controller = __webpack_require__(10);
 
-// polyfill
-var ResetModule = exports.ResetModule = __webpack_require__(10);
+// @polyfill
+var ResetModule = exports.ResetModule = __webpack_require__(11);
 
 /***/ }),
 /* 3 */
@@ -342,7 +343,7 @@ var Inject = function Inject() {
             return instance;
         };
 
-        originInitHook = OriginalConstructor.prototype['$onInit'];
+        var originInitHook = OriginalConstructor.prototype['$onInit'];
 
         OriginalConstructor.prototype['$onInit'] = function () {
             originInitHook.apply(this);
@@ -575,6 +576,29 @@ module.exports = Component;
 
 /***/ }),
 /* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var Controller = function Controller(options) {
+    return function (target, name, descriptor) {
+        if (descriptor) {
+            throw new SyntaxError('non-constructor can not use @Service');
+        }
+
+        target.prototype.$$extend = {
+            type: 'controller',
+            name: options.name,
+            controller: target
+        };
+    };
+};
+
+module.exports = Controller;
+
+/***/ }),
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
