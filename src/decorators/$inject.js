@@ -63,7 +63,7 @@ const Inject = (...dependencies) => (originTarget, name, descriptor) => {
         }
     }
 
-    originInitHook = OriginalConstructor.prototype['$onInit'];
+    let originInitHook = OriginalConstructor.prototype['$onInit'];
 
     OriginalConstructor.prototype['$onInit'] = function () {
         originInitHook.apply(this);
