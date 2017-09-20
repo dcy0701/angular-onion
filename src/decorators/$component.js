@@ -11,8 +11,6 @@ const Component = (options) => (target, name, descriptor) => {
         controller: target,
         bindings: props
     };
-
-    angular.module = angular.module
 };
 
 module.exports = Component;

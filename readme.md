@@ -36,6 +36,10 @@ class justTestController {
 
 ```
 
+### polyfill
+
+must rewrite `moduleInstance.extend() ` for register `service`, `component`, `controller` if you want to use these decorators.
+
 ### install
 
 

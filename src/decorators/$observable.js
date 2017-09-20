@@ -1,7 +1,6 @@
 const Watch = require('../builtIns/watch.js');
 
 const Observable = (...options) => (target, name, descriptor) => {
-    // options 1. expression, 2. deep, 3. method(optional watch, watchGroup..etc)
     let watchMethod = '$watch';
     const watchUtilMethod = ['$watch', '$watchCollection', '$watchGroup'];
 
@@ -19,7 +18,6 @@ const Observable = (...options) => (target, name, descriptor) => {
         throw new SyntaxError(`@Observable() method ${name} only support ${watchUtilMethod.join('、')} method;`);
     }
 
-    // $$Observable Watch 的队列
     target.$$Observable || (target.$$Observable = []);
 
     let observe = {
