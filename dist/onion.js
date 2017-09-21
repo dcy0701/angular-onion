@@ -475,7 +475,6 @@ var Observable = function Observable() {
     }
 
     return function (target, name, descriptor) {
-        // options 1. expression, 2. deep, 3. method(optional watch, watchGroup..etc)
         var watchMethod = '$watch';
         var watchUtilMethod = ['$watch', '$watchCollection', '$watchGroup'];
 
@@ -496,16 +495,7 @@ var Observable = function Observable() {
             throw new SyntaxError('@Observable() method ' + name + ' only support ' + watchUtilMethod.join('、') + ' method;');
         }
 
-        // $$Observable Watch 的队列
         target.$$Observable || (target.$$Observable = []);
-
-        // 为什么判断 undefined. 因为babel转码会把es module的this转化为 undefined; 并且格式化
-        if (typeof expression !== 'string' && expression.toString().includes('undefined.')) {
-            var line = expression.toString().split('\n').filter(function (line) {
-                return line.includes('return');
-            })[0];
-            expression = line.toString().replace('return', '').replace('undefined.', '$ctrl.');
-        }
 
         var observe = {
             method: watchMethod,
@@ -567,8 +557,6 @@ var Component = function Component(options) {
             controller: target,
             bindings: props
         };
-
-        angular.module = angular.module;
     };
 };
 
@@ -630,6 +618,11 @@ function resetModule() {
                 var _controller2 = extendInfo.controller;
 
                 this.service(_name, _controller2);
+            } else if (extendInfo.type === 'controller') {
+                var _controller3 = extendInfo.controller,
+                    _name2 = extendInfo.name;
+
+                this.controller(_name2, _controller3);
             }
         };
         return result;
