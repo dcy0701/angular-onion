@@ -556,7 +556,11 @@ var Component = function Component(options) {
 
         var selector = options.selector,
             template = options.template,
-            props = options.props;
+            props = options.props,
+            bindings = options.bindings;
+
+
+        props = props ? props : bindings;
 
         target.prototype.$$extend = {
             type: 'component',

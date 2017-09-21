@@ -3,7 +3,10 @@ const Component = (options) => (target, name, descriptor) => {
         throw new SyntaxError('non-constructor can not use @Component');
     }
 
-    let { selector, template, props } = options;
+    let { selector, template, props, bindings } = options;
+
+    props = props ? props: bindings;
+
     target.prototype.$$extend = {
         type: 'component',
         selector,
