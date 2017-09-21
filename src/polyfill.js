@@ -7,7 +7,7 @@ function resetModule () {
             if (extendInfo.type === 'component') {
                 let selector = extendInfo.selector.replace(/-([a-z])/g, (str, match) => match.toLocaleUpperCase());
                 let {template, controller, bindings} = extendInfo;
-                this.component(selector, {
+                return this.component(selector, {
                     template,
                     controller,
                     bindings
@@ -15,10 +15,10 @@ function resetModule () {
             } else if (extendInfo.type === 'service') {
                 let name = extendInfo.name.replace(/-([a-z])/g, (str, match) => match.toLocaleUpperCase());
                 let {controller} = extendInfo;
-                this.service(name, controller);
+                return this.service(name, controller);
             } else if (extendInfo.type === 'controller') {
                 let {controller, name} = extendInfo;
-                this.controller(name, controller);
+                return this.controller(name, controller);
             }
         };
         return result;

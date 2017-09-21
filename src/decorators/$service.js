@@ -3,9 +3,17 @@ const Service = (options) => (target, name, descriptor) => {
         throw new SyntaxError('non-constructor can not use @Service');
     }
 
+    let ServiceName;
+
+    if (typeof options === 'string') {
+        ServiceName = options;
+    } else {
+        ServiceName = options.name;
+    }
+
     target.prototype.$$extend = {
         type: 'service',
-        name: options.name,
+        ServiceName,
         controller: target
     };
 };

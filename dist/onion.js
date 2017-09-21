@@ -523,9 +523,17 @@ var Service = function Service(options) {
             throw new SyntaxError('non-constructor can not use @Service');
         }
 
+        var ServiceName = void 0;
+
+        if (typeof options === 'string') {
+            ServiceName = options;
+        } else {
+            ServiceName = options.name;
+        }
+
         target.prototype.$$extend = {
             type: 'service',
-            name: options.name,
+            ServiceName: ServiceName,
             controller: target
         };
     };
@@ -575,9 +583,17 @@ var Controller = function Controller(options) {
             throw new SyntaxError('non-constructor can not use @Service');
         }
 
+        var ControllerName = void 0;
+
+        if (typeof options === 'string') {
+            ControllerName = options;
+        } else {
+            ControllerName = options.name;
+        }
+
         target.prototype.$$extend = {
             type: 'controller',
-            name: options.name,
+            name: ControllerName,
             controller: target
         };
     };
@@ -606,7 +622,7 @@ function resetModule() {
                     _controller = extendInfo.controller,
                     bindings = extendInfo.bindings;
 
-                this.component(selector, {
+                return this.component(selector, {
                     template: template,
                     controller: _controller,
                     bindings: bindings
@@ -617,12 +633,12 @@ function resetModule() {
                 });
                 var _controller2 = extendInfo.controller;
 
-                this.service(_name, _controller2);
+                return this.service(_name, _controller2);
             } else if (extendInfo.type === 'controller') {
                 var _controller3 = extendInfo.controller,
                     _name2 = extendInfo.name;
 
-                this.controller(_name2, _controller3);
+                return this.controller(_name2, _controller3);
             }
         };
         return result;
