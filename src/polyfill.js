@@ -16,6 +16,9 @@ function resetModule () {
                 let name = extendInfo.name.replace(/-([a-z])/g, (str, match) => match.toLocaleUpperCase());
                 let {controller} = extendInfo;
                 this.service(name, controller);
+            } else if (extendInfo.type === 'controller') {
+                let {controller, name} = extendInfo;
+                this.controller(name, controller);
             }
         };
         return result;
