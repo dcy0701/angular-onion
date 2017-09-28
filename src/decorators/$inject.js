@@ -67,7 +67,8 @@ const Inject = (...dependencies) => (originTarget, name, descriptor) => {
 
     OriginalConstructor.prototype['$onInit'] = function () {
         originInitHook.apply(this);
-        for (let observe of originTarget.prototype.$$Observable) {
+        let observableList = originTarget.prototype.$$Observable || [];
+        for (let observe of observableList) {
             let {method, expression, handler, deep} = observe;
             if (typeof expression == 'string') {
                 this.$scope[method](expression, handler.bind(this), true);

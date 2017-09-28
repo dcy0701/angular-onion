@@ -347,12 +347,13 @@ var Inject = function Inject() {
 
         OriginalConstructor.prototype['$onInit'] = function () {
             originInitHook.apply(this);
+            var observableList = originTarget.prototype.$$Observable || [];
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
             var _iteratorError = undefined;
 
             try {
-                for (var _iterator = originTarget.prototype.$$Observable[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                for (var _iterator = observableList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
                     var observe = _step.value;
                     var method = observe.method,
                         expression = observe.expression,
