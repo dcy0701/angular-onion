@@ -346,7 +346,7 @@ var Inject = function Inject() {
         var originInitHook = OriginalConstructor.prototype['$onInit'];
 
         OriginalConstructor.prototype['$onInit'] = function () {
-            originInitHook.apply(this);
+            originInitHook && originInitHook.apply(this);
             var observableList = originTarget.prototype.$$Observable || [];
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;

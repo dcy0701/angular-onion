@@ -66,7 +66,7 @@ const Inject = (...dependencies) => (originTarget, name, descriptor) => {
     let originInitHook = OriginalConstructor.prototype['$onInit'];
 
     OriginalConstructor.prototype['$onInit'] = function () {
-        originInitHook.apply(this);
+        originInitHook && originInitHook.apply(this);
         let observableList = originTarget.prototype.$$Observable || [];
         for (let observe of observableList) {
             let {method, expression, handler, deep} = observe;
