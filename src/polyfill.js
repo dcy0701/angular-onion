@@ -25,6 +25,4 @@ function resetModule () {
     }
 }
 
-resetModule();
-
 module.exports = resetModule;
