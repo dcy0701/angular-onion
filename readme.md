@@ -22,7 +22,7 @@ class justTestController {
        this.user = 'onion'
     }
 
-    @Observable(() => this.user, true)
+    @Observable('$ctrl.user', true)
     watchUser (newVal) {
        // Observable callback
     }
