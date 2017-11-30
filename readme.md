@@ -1,6 +1,6 @@
 ### exapmle
 ```
-import { Inject, Mixin, Observable, Component } from 'angular-onion'
+import { Inject, Mixin, Observable, Component, Output } from 'angular-onion'
 
 import auto from './mixin.js'
 import justTestHtml from './just-test.html'
@@ -31,7 +31,7 @@ class justTestController {
     }
 
     // Observable callback
-    @Observable('$ctrl.user', true)
+    @Observable('$ctrl.user')
     watchUser (newVal) {
 
     }
