@@ -8,30 +8,45 @@ import justTestHtml from './just-test.html'
 @Component({
     selector: 'just-test',
     props: {
-        type: '@'
+        lastname: '@'
     },
     template: justTestHtml
 })
 
-@Inject('Validators')
+// Auto Inject
+@Inject('$resource')
 
 @Mixin(auto)
 class justTestController {
-    constructor () {
-       // constructor
-       this.user = 'onion'
+    user = 'onion'
+
+    firstName = 'xi'
+
+    partName = this.user + this.lastname;
+
+    // event callback
+    @Output('event from anywhere')
+    subscribe (data) {
+
     }
 
+    // Observable callback
     @Observable('$ctrl.user', true)
     watchUser (newVal) {
-       // Observable callback
+
     }
 
+    // computed
+    get fullName () {
+        return this.firstName + this.partName;
+    }
+
+    // lifecycle
     $onInit () {
-       // lifecycle
+        console.log(this.fullName)
     }
 
-    ....
+    // ....
 }
 
 ```

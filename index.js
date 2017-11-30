@@ -6,10 +6,11 @@ export let Watch = require('./src/builtIns/watch');
 // @decorators
 export let Inject = require('./src/decorators/$inject');
 export let Mixin = require('./src/decorators/$mixin');
-export let Observable = require('./src/decorators/$Observable');
-export let Service = require('./src/decorators/$Service');
-export let Component = require('./src/decorators/$Component');
-export let controller = require('./src/decorators/$controller');
+export let Observable = require('./src/decorators/$observable');
+export let Service = require('./src/decorators/$service');
+export let Component = require('./src/decorators/$component');
+export let Controller = require('./src/decorators/$controller');
+export let Output = require('./src/decorators/$output');
 
 // @polyfill
 export let ResetModule = require('./src/polyfill.js');

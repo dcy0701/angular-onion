@@ -195,10 +195,11 @@ var Mixin = exports.Mixin = __webpack_require__(6);
 var Observable = exports.Observable = __webpack_require__(7);
 var Service = exports.Service = __webpack_require__(8);
 var Component = exports.Component = __webpack_require__(9);
-var controller = exports.controller = __webpack_require__(10);
+var Controller = exports.Controller = __webpack_require__(10);
+var Output = exports.Output = __webpack_require__(11);
 
 // @polyfill
-var ResetModule = exports.ResetModule = __webpack_require__(11);
+var ResetModule = exports.ResetModule = __webpack_require__(12);
 
 /***/ }),
 /* 3 */
@@ -343,10 +344,13 @@ var Inject = function Inject() {
             return instance;
         };
 
-        var originInitHook = OriginalConstructor.prototype['$onInit'];
+        var originInitHook = OriginalConstructor.prototype['$onInit'] || function () {};
 
         OriginalConstructor.prototype['$onInit'] = function () {
+            var _this2 = this;
+
             originInitHook && originInitHook.apply(this);
+
             var observableList = originTarget.prototype.$$Observable || [];
             var _iteratorNormalCompletion = true;
             var _didIteratorError = false;
@@ -377,6 +381,42 @@ var Inject = function Inject() {
                 } finally {
                     if (_didIteratorError) {
                         throw _iteratorError;
+                    }
+                }
+            }
+
+            var outputList = originTarget.prototype.$$Output || [];
+
+            var _loop = function _loop(output) {
+                var event = output.event,
+                    handler = output.handler;
+
+                _this2.$rootScope.$on(event, function (_, data) {
+                    handler.call(_this2, data);
+                });
+            };
+
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
+            try {
+                for (var _iterator2 = outputList[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                    var output = _step2.value;
+
+                    _loop(output);
+                }
+            } catch (err) {
+                _didIteratorError2 = true;
+                _iteratorError2 = err;
+            } finally {
+                try {
+                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                        _iterator2.return();
+                    }
+                } finally {
+                    if (_didIteratorError2) {
+                        throw _iteratorError2;
                     }
                 }
             }
@@ -585,7 +625,7 @@ module.exports = Component;
 var Controller = function Controller(options) {
     return function (target, name, descriptor) {
         if (descriptor) {
-            throw new SyntaxError('non-constructor can not use @Service');
+            throw new SyntaxError('non-constructor can not use @Controller');
         }
 
         var ControllerName = void 0;
@@ -613,9 +653,35 @@ module.exports = Controller;
 "use strict";
 
 
+var Output = function Output(event) {
+    return function (target, name, descriptor) {
+        target.$$Output || (target.$$Output = []);
+
+        var outputHandle = {
+            event: event,
+            handler: target[name]
+        };
+
+        target.$$Output.push(outputHandle);
+    };
+};
+
+module.exports = Output;
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
 function resetModule() {
+    if (typeof angular === 'undefined') {
+        return;
+    }
+
     var angularModule = angular.module;
-    angular.module = function (name, requires, configFn) {
+    angular.module = angular.module = angular.$$onion ? angularModule : function (name, requires, configFn) {
         var result = angularModule.call(angular, name, requires, configFn);
         result.extend = function (controller) {
             var extendInfo = controller.prototype.$$extend;
@@ -648,7 +714,10 @@ function resetModule() {
         };
         return result;
     };
+    angular.$$onion = true;
 }
+
+resetModule();
 
 module.exports = resetModule;
 

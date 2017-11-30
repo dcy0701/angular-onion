@@ -1,6 +1,10 @@
 function resetModule () {
-    var angularModule = angular.module;
-    angular.module = function (name, requires, configFn) {
+    if (typeof angular === 'undefined') {
+        return;
+    }
+
+    let angularModule = angular.module;
+    angular.module = angular.module = angular.$$onion ? angularModule : function (name, requires, configFn) {
         let result = angularModule.call(angular, name, requires, configFn);
         result.extend = function (controller) {
             let extendInfo = controller.prototype.$$extend;
@@ -22,7 +26,10 @@ function resetModule () {
             }
         };
         return result;
-    }
+    };
+    angular.$$onion = true;
 }
+
+resetModule();
 
 module.exports = resetModule;

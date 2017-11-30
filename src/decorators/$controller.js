@@ -1,6 +1,6 @@
 const Controller = (options) => (target, name, descriptor) => {
     if (descriptor) {
-        throw new SyntaxError('non-constructor can not use @Service');
+        throw new SyntaxError('non-constructor can not use @Controller');
     }
 
     let ControllerName;

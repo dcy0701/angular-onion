@@ -63,10 +63,11 @@ const Inject = (...dependencies) => (originTarget, name, descriptor) => {
         }
     }
 
-    let originInitHook = OriginalConstructor.prototype['$onInit'];
+    let originInitHook = OriginalConstructor.prototype['$onInit'] || function () {};
 
     OriginalConstructor.prototype['$onInit'] = function () {
         originInitHook && originInitHook.apply(this);
+
         let observableList = originTarget.prototype.$$Observable || [];
         for (let observe of observableList) {
             let {method, expression, handler, deep} = observe;
@@ -75,6 +76,14 @@ const Inject = (...dependencies) => (originTarget, name, descriptor) => {
             } else {
                 this.$scope[method](expression.bind(this), handler.bind(this), true);
             }
+        }
+
+        let outputList = originTarget.prototype.$$Output || [];
+        for (let output of outputList) {
+            let {event, handler} = output;
+            this.$rootScope.$on(event, (_, data) => {
+                handler.call(this, data);
+            });
         }
     };
 
