@@ -12,6 +12,9 @@ export const Component = require('./src/decorators/$component');
 export const Controller = require('./src/decorators/$controller');
 export const Output = require('./src/decorators/$output');
 
+// @autobind
+export const autobind = require('autobind-decorator');
+
 // @polyfill
 export const ResetModule = require('./src/polyfill');
 
