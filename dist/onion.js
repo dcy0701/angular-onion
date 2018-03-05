@@ -576,9 +576,10 @@ var Observable = function Observable() {
         var observe = {
             method: watchMethod,
             expression: expression,
-            handler: target[name],
             deep: deep
         };
+
+        Object.defineProperty(observe, 'handler', descriptor);
 
         target.$$Observable.push(observe);
     };

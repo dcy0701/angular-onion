@@ -23,9 +23,10 @@ const Observable = (...options) => (target, name, descriptor) => {
     let observe = {
         method: watchMethod,
         expression,
-        handler: target[name],
         deep
     };
+
+    Object.defineProperty(observe, 'handler', descriptor);
 
     target.$$Observable.push(observe);
 };
