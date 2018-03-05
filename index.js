@@ -13,10 +13,9 @@ export const Controller = require('./src/decorators/$controller');
 export const Output = require('./src/decorators/$output');
 
 // @core-decorators
-export const autobind = require('autobind-decorator');
 export const Debounce = require('./src/decorators/$debounce');
 export const Throttle = require('./src/decorators/$throttle');
-
+export const Autobind = require('./src/decorators/$autobind');
 
 // @polyfill
 export const ResetModule = require('./src/polyfill');
