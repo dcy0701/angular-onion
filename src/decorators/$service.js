@@ -13,7 +13,7 @@ const Service = (options) => (target, name, descriptor) => {
 
     target.prototype.$$extend = {
         type: 'service',
-        ServiceName,
+        name: ServiceName,
         controller: target
     };
 };
