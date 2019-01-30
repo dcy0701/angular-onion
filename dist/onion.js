@@ -288,7 +288,7 @@ var _loop = function _loop(event) {
             var injector = INJECTOR.getInjector;
             var rootScope = injector.get(eventHandleElement);
             return function () {
-                rootScope[event].apply(rootScope, arguments);
+                return rootScope[event].apply(rootScope, arguments);
             };
         }
     });
@@ -610,7 +610,7 @@ var Service = function Service(options) {
 
         target.prototype.$$extend = {
             type: 'service',
-            ServiceName: ServiceName,
+            name: ServiceName,
             controller: target
         };
     };

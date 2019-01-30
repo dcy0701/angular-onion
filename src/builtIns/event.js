@@ -14,7 +14,7 @@ for (let event of eventsPreset) {
             let injector = INJECTOR.getInjector;
             let rootScope = injector.get(eventHandleElement);
             return function (...args) {
-                rootScope[event](...args);
+                return rootScope[event](...args);
             }
         }
     });
