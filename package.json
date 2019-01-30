@@ -14,13 +14,13 @@
     ]
   ],
   "_from": "angular-onion@latest",
-  "_id": "angular-onion@8.3.5",
+  "_id": "angular-onion@9",
   "_inCache": true,
   "_location": "/angular-onion",
   "_nodeVersion": "6.10.2",
   "_npmOperationalInternal": {
     "host": "s3://npm-registry-packages",
-    "tmp": "tmp/angular-onion-8.3.5.tgz_1505111756445_0.607928388286382"
+    "tmp": "tmp/angular-onion-9.tgz_1505111756445_0.607928388286382"
   },
   "_npmUser": {
     "name": "onion3",
@@ -40,7 +40,7 @@
   "_requiredBy": [
     "#USER"
   ],
-  "_resolved": "https://registry.npmjs.org/angular-onion/-/angular-onion-8.3.5.tgz",
+  "_resolved": "https://registry.npmjs.org/angular-onion/-/angular-onion-9.tgz",
   "_shasum": "f2fd94a2f92615e2384e5ac77c520646d54b803c",
   "_shrinkwrap": null,
   "_spec": "angular-onion",
@@ -65,7 +65,7 @@
   "directories": {},
   "dist": {
     "shasum": "f2fd94a2f92615e2384e5ac77c520646d54b803c",
-    "tarball": "https://registry.npmjs.org/angular-onion/-/angular-onion-8.3.5.tgz"
+    "tarball": "https://registry.npmjs.org/angular-onion/-/angular-onion-9.tgz"
   },
   "license": "MIT",
   "main": "dist/onion.js",
@@ -82,5 +82,5 @@
     "build": "webpack --config webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "version": "8.3.5"
+  "version": "9"
 }
